@@ -5,6 +5,7 @@ import com.duyguozdugan.library_management_system.dto.response.BookResponse;
 import com.duyguozdugan.library_management_system.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,21 @@ public class BookController {
         bookService.updateBook(id, bookRequest);
         return ResponseEntity.ok("Book updated successfully.");
     }
+
+    @PostMapping("/{bookId}/borrow")
+    public ResponseEntity<?> borrowBook(@PathVariable Long bookId) {
+        String loggedInUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        bookService.borrowBook(bookId, loggedInUserEmail);
+        return ResponseEntity.ok("Book borrowed successfully.");
+    }
+
+    @PostMapping("/{bookId}/return")
+    public ResponseEntity<?> returnBook(@PathVariable Long bookId) {
+        String loggedInUserEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        bookService.returnBook(bookId, loggedInUserEmail);
+        return ResponseEntity.ok("Book returned successfully.");
+    }
+
 }
 
 

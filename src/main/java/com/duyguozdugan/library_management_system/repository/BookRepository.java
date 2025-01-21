@@ -19,10 +19,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByCategory(String category);
 
     // 4. Ödünç alınmamış kitapları listeleme
-    List<Book> findByBorrowedFalse();
+
 
     // 5. Ödünç alınmış kitapları listeleme
-    List<Book> findByBorrowedTrue();
+
 
 
 }

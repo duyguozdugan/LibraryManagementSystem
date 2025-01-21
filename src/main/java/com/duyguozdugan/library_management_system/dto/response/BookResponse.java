@@ -1,5 +1,6 @@
 package com.duyguozdugan.library_management_system.dto.response;
 
+import com.duyguozdugan.library_management_system.model.BookStatus;
 import lombok.Getter;
 
 import lombok.Setter;
@@ -12,7 +13,7 @@ public class BookResponse {
     private String title;
     private String author;
     private String category;
-    private boolean borrowed;
+    private BookStatus borrowed;
 
     public Long getId() {
         return id;
@@ -46,15 +47,15 @@ public class BookResponse {
         this.category = category;
     }
 
-    public boolean isBorrowed() {
+    public BookStatus getBorrowed() {
         return borrowed;
     }
 
-    public void setBorrowed(boolean borrowed) {
+    public void setBorrowed(BookStatus borrowed) {
         this.borrowed = borrowed;
     }
 
-    public BookResponse(Long id, String title, String author, String category, boolean borrowed) {
+    public BookResponse(Long id, String title, String author, String category, BookStatus borrowed) {
         this.id = id;
         this.title = title;
         this.author = author;

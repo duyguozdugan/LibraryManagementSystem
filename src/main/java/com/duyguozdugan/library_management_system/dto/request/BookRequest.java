@@ -1,5 +1,6 @@
 package com.duyguozdugan.library_management_system.dto.request;
 
+import com.duyguozdugan.library_management_system.model.BookStatus;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class BookRequest {
         @Size(min = 1, max = 100, message = "Author must be between 1 and 100 characters")
         private String author;
         private String category;
+
 
         public @NotNull @Size(min = 1, max = 100, message = "Title must be between 1 and 100 characters") String getTitle() {
                 return title;

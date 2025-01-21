@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class User  implements UserDetails {
 
     @Id
@@ -43,23 +44,6 @@ public class User  implements UserDetails {
 
 
 
-    public void borrowBook(Book book) {
-        if (!book.isBorrowed()) {
-            book.setBorrowed(true);
-            borrowedBooks.add(book);
-        } else {
-            throw new IllegalStateException("This book is already borrowed.");
-        }
-    }
-
-    public void returnBook(Book book) {
-        if (borrowedBooks.contains(book)) {
-            book.setBorrowed(false);
-            borrowedBooks.remove(book);
-        } else {
-            throw new IllegalStateException("This book is not borrowed by this user.");
-        }
-    }
     public void updateFrom(UserRequest user) {
 
         if (user.getUsername() != null) this.username = user.getUsername();

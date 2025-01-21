@@ -18,7 +18,9 @@ public class Book {
     private String title;
     private String author;
     private String category;
-    private boolean borrowed = false;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookStatus bookStatus = BookStatus.AVAILABLE;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -28,12 +30,12 @@ public class Book {
     }
 
 
-    public Book(Long id, String title, String author, String category, boolean borrowed, User borrowedBy) {
+    public Book(Long id, String title, String author, String category,BookStatus bookStatus, User borrowedBy) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
-        this.borrowed = borrowed;
+        this.bookStatus = bookStatus;
         this.borrowedBy = borrowedBy;
     }
 
@@ -41,7 +43,6 @@ public class Book {
         this.title = title;
         this.author = author;
         this.category = category;
-        this.borrowed = false;
     }
 
 
@@ -49,11 +50,16 @@ public class Book {
         if (book.getTitle() != null) this.title = book.getTitle();
         if (book.getAuthor() != null) this.author = book.getAuthor();
         if (book.getCategory() != null) this.category = book.getCategory();
-        this.borrowed = book.isBorrowed();
-        this.borrowedBy = book.getBorrowedBy();
     }
 
 
+    public BookStatus getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
+    }
 
     public Long getId() {
         return id;
@@ -87,13 +93,8 @@ public class Book {
         this.category = category;
     }
 
-    public boolean isBorrowed() {
-        return borrowed;
-    }
 
-    public void setBorrowed(boolean borrowed) {
-        this.borrowed = borrowed;
-    }
+
 
     public User getBorrowedBy() {
         return borrowedBy;
